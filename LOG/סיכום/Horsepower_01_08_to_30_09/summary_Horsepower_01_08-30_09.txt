@@ -1,0 +1,21 @@
+Summary from 2025-08-01 00:00:00 to 2025-09-30 23:59:59 (61 days)
+Log data time range: 2025-08-01 08:37:46 to 2025-09-30 08:44:03 (61 days)
+
+Total Ball lifted: 26728
+Total english language: 2503
+Total hebrew language: 2496
+Total arabic language: 2299
+Total language changes: 7298
+
+Average Ball lifted per day: 438.16
+Average english language per day: 41.03
+Average hebrew language per day: 40.92
+Average arabic language per day: 37.69
+Average total language changes per day: 119.64
+
+Good runs: 26728 / 34026 (78.55%)
+
+---
+UI restarts between 09:30 and 18:00: 14
+Arduino disconnections between 09:30 and 18:00: 1
+Error parsing data: 0
