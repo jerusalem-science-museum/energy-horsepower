@@ -1,0 +1,16 @@
+# ==============================================================================
+# Requirements for Jerusalem Science Museum - Energy & Horsepower Exhibit
+# ==============================================================================
+
+# Hardware Communication & Sensor Interfacing
+pyserial>=3.5            # Reading RPM, load cells, or generator data via Arduino
+
+# User Interface & Kiosk Display
+pygame>=2.5.2            # Main exhibit loop, dynamic dials, animations, and high-score screens
+
+# Data Processing & Live Graphing
+matplotlib>=3.8.0        # Real-time graphing of horsepower/wattage over time
+numpy>=1.26.0            # Processing sensor data arrays and smoothing raw signals
+
+# System Utilities
+python-dotenv>=1.0.1     # Managing configurations (COM ports, thresholds)

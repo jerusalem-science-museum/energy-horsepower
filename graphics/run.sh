@@ -1,45 +1,36 @@
 #!/bin/bash
 
-# Define paths
-PROJECT_DIR="/home/mada/horse_power_py"
-VENV_DIR="$PROJECT_DIR/horse_power_py_venv"
-MAIN_SCRIPT="$PROJECT_DIR/main.py"
+# ==============================================================================
+# Jerusalem Science Museum - Energy & Horsepower Exhibit Launch Script
+# System Python Deployment (Direct Launch)
+# ==============================================================================
 
-# Function to check if a Python package is installed in the virtual environment
-check_and_install() {
-    PACKAGE=$1
-    if $VENV_DIR/bin/python -c "import $PACKAGE" &> /dev/null; then
-        echo "$PACKAGE is already installed."
+# Ensure the script runs from the directory it is located in
+cd "$(dirname "$0")"
+
+echo "=================================================="
+echo " Starting JSM Exhibit: Energy - Horsepower        "
+echo "=================================================="
+
+# 1. Display & Screen Configuration (Museum Floor Standards)
+export DISPLAY=:0
+xset s off      # Disable screen saver timeout
+xset -dpms      # Disable Display Power Management Signaling
+xset s noblank  # Prevent screen from short-term blanking
+
+# 2. Permanent Execution & Crash Recovery Loop
+while true; do
+    echo "[LAUNCH] Launching main.py using system python3..."
+    python3 main.py
+    
+    EXIT_CODE=$?
+    
+    if [ $EXIT_CODE -eq 0 ]; then
+        echo "[EXIT] Application closed normally by user. Terminating script."
+        break
     else
-        echo "$PACKAGE is not installed. Installing..."
-        $VENV_DIR/bin/pip install $PACKAGE
+        echo "[CRASH] Application exited unexpectedly (Code: $EXIT_CODE)."
+        echo "[RECOVERY] Restarting exhibit loop in 3 seconds..."
+        sleep 3
     fi
-}
-
-# Check if virtual environment exists, if not, create it
-if [ ! -d "$VENV_DIR" ]; then
-    echo "Virtual environment not found in $PROJECT_DIR. Creating a new one..."
-    python3 -m venv "$VENV_DIR"
-    echo "Virtual environment created at $VENV_DIR."
-else
-    echo "Virtual environment found in $PROJECT_DIR."
-fi
-
-# Activate the virtual environment
-source "$VENV_DIR/bin/activate"
-
-# Upgrade pip in the virtual environment
-echo "Upgrading pip..."
-pip install --upgrade pip
-
-# Check and install required packages
-check_and_install pygame
-check_and_install pyserial
-
-# Run the main script
-echo "Running $MAIN_SCRIPT..."
-python "$MAIN_SCRIPT"
-
-# Deactivate the virtual environment after running the script
-deactivate
-
+done
