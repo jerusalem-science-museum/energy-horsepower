@@ -1,15 +1,15 @@
 #!/bin/bash
 
 # ==============================================================================
-# Jerusalem Science Museum - Energy & Horsepower Exhibit Launch Script
-# System Python Deployment (Direct Launch)
+# Jerusalem Science Museum - Energy & Air Pressure Exhibit Launch Script
+# Compliant with JSM Kiosk App Setup (.venv standard)
 # ==============================================================================
 
 # Ensure the script runs from the directory it is located in
 cd "$(dirname "$0")"
 
 echo "=================================================="
-echo " Starting JSM Exhibit: Energy - Horsepower        "
+echo " Starting JSM Exhibit: Energy - Air Pressure "
 echo "=================================================="
 
 # 1. Display & Screen Configuration (Museum Floor Standards)
@@ -18,9 +18,18 @@ xset s off      # Disable screen saver timeout
 xset -dpms      # Disable Display Power Management Signaling
 xset s noblank  # Prevent screen from short-term blanking
 
-# 2. Permanent Execution & Crash Recovery Loop
+# 2. Python Virtual Environment (.venv) Activation
+# Standard JSM Kiosk configuration uses hidden .venv
+if [ -d ".venv" ]; then
+    echo "[INFO] Activating virtual environment (.venv)..."
+    source .venv/bin/activate
+else
+    echo "[WARNING] '.venv' directory not found. Proceeding with system Python."
+fi
+
+# 3. Permanent Execution & Crash Recovery Loop
 while true; do
-    echo "[LAUNCH] Launching main.py using system python3..."
+    echo "[LAUNCH] Launching main.py..."
     python3 main.py
     
     EXIT_CODE=$?
